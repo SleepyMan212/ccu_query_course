@@ -49,9 +49,41 @@ header {
       background: rgba(255, 255, 255, 0.3); }
 
 .course_box {
+  /* display:flex; */
+  /* flex-flow: wrap; */
+  /* flex-flow: column; */
+  /* flex-flow:wrap; */
+  width: 300px;
   border: solid 1px;
   margin: 15px 15px;
-  padding: 10px 5px; }
+  padding: 10px 5px;
+  cursor: pointer; }
+  .course_box:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #0c0d0c; }
+  .course_box > * {
+    margin: 5px 0; }
 
 .highlight {
   background: rgba(255, 255, 255, 0.4); }
+
+.couerse_panel {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap; }
+
+.course_box .course_name {
+  border: 1px solid;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  /* align-content:center; */ }
