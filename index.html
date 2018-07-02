@@ -24,7 +24,6 @@
       <div class="search">
         <label>課程名稱</label>
         <input type="text" v-model="filter">
-        {{filter}}
       </div>
     </div>
     <!-- {{filter_courses}} -->
@@ -46,9 +45,11 @@
 
   <template id="course">
     <div class="course_box">
-      <div class="course_name" v-html='course.class_name'>aaa</div>
-      <div class="course_teacher"></div>
-      <div class="course_time"></div>
+      <div class="course_name" v-html='course.class_name'></div>
+      <div class="course_teacher" v-html='course.teacher'></div>
+      <div class="course_time" v-html='course.time'></div>
+      <div class="course_location" v-html='course.location'></div>
+
     </div>
   </template>
   <script src="./js/index.js"></script>
