@@ -8,22 +8,27 @@ header{
   /* margin:0 auto; */
 }
 .search_bar{
-  display: flex;
-  flex-flow: wrap;
+  /* display: flex; */
+  /* flex-flow: wrap; */
   margin: 10px 5px;
-  justify-content: center;
+  /* justify-content: center; */
 
   .opts{
     display: flex;
     flex-flow: wrap;
+    min-width:600px
   }
   .opt{
-    width:70px;
-    text-align: center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:85px;
+    height:55px;
+    /* text-align: center; */
     padding: 0 7px;
     border: solid 1px #fff;
     border-radius: 10%;
-    margin: 0px 7px 12px;
+    margin: 12px 7px ;
     &:hover{
       cursor:pointer;
       background: rgba(#fff,0.3);
@@ -59,8 +64,14 @@ header{
 }
 .course_box .course_name{
   /* border: 1px solid; */
-  height: 55px;
+  height: 70px;
   display:flex;
   align-items:center ;
   /* align-content:center; */
+}
+.search{
+  text-align:center;
+}
+.departments{
+  /* height: 150px; */
 }

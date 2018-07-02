@@ -15,10 +15,17 @@
     <header>
         <h1>CCU 課程簡易查詢</h1>
     </header>
+    <hr>
     <div class="search_bar">
-      <div class="opts">
-        <div class="opt" v-for="faculty,i in faculties" v-on:click="change_state(i)">
+      <div class="opts faculties">
+        <div class="opt" v-for="faculty,i in faculties" v-on:click="change_faculty_state(i)">
           {{faculty}}
+        </div>
+      </div>
+      <hr>
+      <div class="opts departments">
+        <div style="font-size:12px" class="opt" v-for="department in departments" v-on:click="change_department_state(department)">
+          {{department}}
         </div>
       </div>
       <div class="search">
@@ -45,6 +52,10 @@
 
   <template id="course">
     <div class="course_box">
+      <div class="course_type">
+        <span class="department" v-html='course.department'></span>
+        <span class="department" v-html='course.grade'></span>
+      </div>
       <div class="course_name" v-html='course.class_name'></div>
       <div class="course_teacher" v-html='course.teacher'></div>
       <div class="course_time" v-html='course.time'></div>
