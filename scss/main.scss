@@ -1,0 +1,41 @@
+@import "_var.scss";
+@import "_reset.scss";
+
+header{
+  min-width: 600px;
+  display: flex;
+  justify-content: center;
+  /* margin:0 auto; */
+}
+.search_bar{
+  display: flex;
+  flex-flow: wrap;
+  margin: 10px 5px;
+  justify-content: center;
+
+  .opts{
+    display: flex;
+    flex-flow: wrap;
+  }
+  .opt{
+    width:70px;
+    text-align: center;
+    padding: 0 7px;
+    border: solid 1px #fff;
+    border-radius: 10%;
+    margin: 0px 7px 12px;
+    &:hover{
+      cursor:pointer;
+      background: rgba(#fff,0.3);
+    }
+  }
+
+}
+.course_box{
+  border: solid 1px;
+  margin: 15px 15px;
+  padding: 10px 5px;
+}
+.highlight{
+  background: rgba(#fff,0.4);
+}

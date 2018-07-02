@@ -1,0 +1,57 @@
+@charset "UTF-8";
+html, body {
+  min-width: 600px;
+  font-family: sans-serif,細明體;
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+  color: #fff; }
+
+.img {
+  max-width: 100%;
+  height: auto; }
+
+header {
+  min-width: 600px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  /* margin:0 auto; */ }
+
+.search_bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  margin: 10px 5px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+  .search_bar .opts {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: wrap;
+    flex-flow: wrap; }
+  .search_bar .opt {
+    width: 70px;
+    text-align: center;
+    padding: 0 7px;
+    border: solid 1px #fff;
+    border-radius: 10%;
+    margin: 0px 7px 12px; }
+    .search_bar .opt:hover {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.3); }
+
+.course_box {
+  border: solid 1px;
+  margin: 15px 15px;
+  padding: 10px 5px; }
+
+.highlight {
+  background: rgba(255, 255, 255, 0.4); }

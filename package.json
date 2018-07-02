@@ -1,0 +1,18 @@
+{
+  "name": "course",
+  "version": "1.0.0",
+  "description": "query the ccu course ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
+  },
+  "keywords": [
+    "course"
+  ],
+  "author": "kwei",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.87.0"
+  }
+}

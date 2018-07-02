@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Query Course</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+  <div id="app">
+
+    <header>
+        <h1>CCU 課程簡易查詢</h1>
+    </header>
+    <div class="search_bar">
+      <div class="opts">
+        <div class="opt" v-for="faculty,i in faculties" v-on:click="change_state(i)">
+          {{faculty}}
+        </div>
+      </div>
+      <div class="search">
+        <label>課程名稱</label>
+        <input type="text" v-model="filter">
+        {{filter}}
+      </div>
+    </div>
+    <!-- {{filter_courses}} -->
+    <div class="couerse_panel">
+      <div class=""  v-for='course in filter_courses'>
+        <!-- {{course.class_name}} -->
+        <!-- <div v-for='cs in course'>
+          {{cs.class_name}}
+
+        </div> -->
+        <!-- <hr> -->
+      </div>
+      <coursebox v-bind:course='cs' v-for='cs in filter_courses'>
+
+      </coursebox>
+    </div>
+    <!-- {{courses}} -->
+  </div>
+
+  <template id="course">
+    <div class="course_box">
+      <div class="course_name" v-html='course.class_name'>aaa</div>
+      <div class="course_teacher"></div>
+      <div class="course_time"></div>
+    </div>
+  </template>
+  <script src="./js/index.js"></script>
+</body>
+</html>
