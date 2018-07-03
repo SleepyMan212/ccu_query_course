@@ -15,7 +15,7 @@ def getdata(url, index,courses):
     if index == 'I001':
         for tr in trs[1:]:
             tds = tr.select('td')
-            tmp = { 
+            tmp = {
                     # 'field': tds[0].text,
                     'direction': tds[1].text,
                     'class_id': tds[2].text,
@@ -27,13 +27,13 @@ def getdata(url, index,courses):
                     'time': tds[9].text,
                     'location': tds[10].text,
                     'limit_people': tds[11].text,
-                    # 'outline': tds[12].select('a')[0].get('href'),
+                    'outline': tds[12].select('a')[0].get('href'),
                     'note': tds[13].text,
                    }
             courses[index].append(tmp)
-        
+
     elif (index[-1] == '6' and index != '7306') or index == '4508':
-        for tr in trs[1:]:        
+        for tr in trs[1:]:
             tds = tr.select('td')
             tmp = { 'grade': tds[0].text,
                     'class_id': tds[1].text,
@@ -45,7 +45,7 @@ def getdata(url, index,courses):
                     'time': tds[8].text,
                     'location': tds[9].text,
                     'limit_people': tds[10].text,
-                    # 'outline': tds[12].select('a')[0].get('href'),
+                    'outline': tds[12].select('a')[0].get('href'),
                     'note': tds[13].text,
                     # 'direction':''
                     }
@@ -64,21 +64,21 @@ def getdata(url, index,courses):
                    'time': tds[8].text,
                    'location': tds[9].text,
                    'limit_people': tds[10].text,
-                #    'outline': tds[11].select('a')[0].get('href'),
+                   'outline': tds[11].select('a')[0].get('href'),
                    'note': tds[12].text,
                 #    'direction': ''
                    }
             courses[index].append(tmp)
-           
+
 def crawler():
-    global courses 
+    global courses
     courses = {}
     url = 'https://kiki.ccu.edu.tw/~ccmisp06/Course/'
     # url = 'http://www.taiwanlottery.com.tw/'
     html = requests.get(url)
     # print(html.text)
     html.encoding = 'utf-8'
-    
+
     sp = BeautifulSoup(html.text,'lxml')
 
     table = sp.select('table')
@@ -97,7 +97,7 @@ def crawler():
             if not href[0:4] in courses:
                 courses[href[0:4]]=[]
             getdata(os.path.join(url, href), href[0:4], courses)
-        print('--------------------------------------') 
+        print('--------------------------------------')
     # print(courses)
 
 def print_course(id,course):
@@ -158,7 +158,7 @@ if os.path.exists('code_table.json'):
     with open('code_table.json', "r", encoding='utf-8') as f:
         import json
         code_table = json.load(f)
-#crawler()
+crawler()
 #print(code_table)
 # print(courses)
 #print(code_table)

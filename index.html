@@ -33,25 +33,16 @@
         <input type="text" v-model="filter">
       </div>
     </div>
-    <!-- {{filter_courses}} -->
     <div class="couerse_panel">
-      <div class=""  v-for='course in filter_courses'>
-        <!-- {{course.class_name}} -->
-        <!-- <div v-for='cs in course'>
-          {{cs.class_name}}
-
-        </div> -->
-        <!-- <hr> -->
-      </div>
-      <coursebox v-bind:course='cs' v-for='cs in filter_courses'>
+      <coursebox v-bind:course='cs' v-for='cs in filter_courses' >
 
       </coursebox>
     </div>
     <!-- {{courses}} -->
   </div>
 
-  <template id="course">
-    <div class="course_box">
+  <template id="course"    >
+    <div class="course_box" v-on:click="open_outline(course.outline)">
       <div class="course_type">
         <span class="department" v-html='course.department'></span>
         <span class="department" v-html='course.grade'></span>

@@ -3,6 +3,15 @@ Vue.component('coursebox',{
   props:['course'],
   mounted:()=>{
     // console.log(this.course)
+  },
+  methods:{
+    open_outline(outline){
+      // console.log(this.course);
+      console.log(outline);
+      console.log("BB");
+      // window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');
+      window.open(outline, course.class_name, config='height=500,width=500');
+    },
   }
 });
 const vm = new Vue({
@@ -44,7 +53,7 @@ const vm = new Vue({
       // console.log(this.department);
       let $opt = $('.departments .opt');
       // let $opt = $(`.opt:contains(${id})`);
-      console.log($opt);
+      // console.log($opt);
       this.remove_class($opt);
 
       $opt = $(`.opt:contains(${id})`);
@@ -56,6 +65,12 @@ const vm = new Vue({
         $(i).removeClass('highlight');
       });
     },
+    open_outline(){
+      // console.log(course);
+      console.log("AA");
+      // window.open(course.outline, 'Yahoo', config='height=500,width=500');
+    },
+
   },
   computed:{
     filter_courses:function () {
