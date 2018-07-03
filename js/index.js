@@ -4,14 +4,25 @@ Vue.component('coursebox',{
   mounted:()=>{
     // console.log(this.course)
   },
+  data:()=>{
+    return {
+      grade_color:['rgb(255, 128, 1)','rgb(111, 255, 0)','rgb(0, 165, 255)','rgb(247, 0, 255)']
+    };
+  },
   methods:{
     open_outline(outline){
       // console.log(this.course);
       console.log(outline);
       console.log("BB");
       // window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');
-      window.open(outline, course.class_name, config='height=500,width=500');
+      window.open(outline, this.course.class_name, config='height=500,width=500');
     },
+    color(){
+      let font_color="color: ";
+      // console.log(this.grade_color);
+      // console.log(font_color+this.grade_color[parseInt(this.course.grade)-1]);
+      return font_color+this.grade_color[parseInt(this.course.grade)-1];
+    }
   }
 });
 const vm = new Vue({
