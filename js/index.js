@@ -50,14 +50,18 @@ const vm = new Vue({
     },
     change_department_state(id){
       this.department = this.codes[id];
-      // console.log(this.department);
-      let $opt = $('.departments .opt');
-      // let $opt = $(`.opt:contains(${id})`);
-      // console.log($opt);
+      let $opt = $('.departments .opt');;
       this.remove_class($opt);
 
       $opt = $(`.opt:contains(${id})`);
-      $opt.addClass('highlight');
+
+      $opt.each((i,o)=>{
+        console.log(o.innerText);
+        if(o.innerText==id){
+          $(o).addClass('highlight');
+        }
+      });
+
     },
     remove_class(target){
       Array.from(target).forEach((i)=>{
