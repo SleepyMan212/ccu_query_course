@@ -29,7 +29,12 @@
         </div>
       </div>
       <div class="search">
-        <label>課程名稱</label>
+        <!-- <label>課程名稱</label> -->
+        <select v-model="selected">
+          <option v-for="opt,i in query_options">
+            {{opt}}
+          </option>
+        </select>
         <input type="text" v-model="filter">
       </div>
     </div>
