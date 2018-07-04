@@ -45,7 +45,8 @@
     <div class="course_box" v-on:click="open_outline(course.outline)">
       <div class="course_type">
         <span class="department" v-html='course.department'></span>
-        <span class="grade"  v-bind:style="color()" v-html='course.grade'></span>
+        <span class="direction" v-if="course.category=='通識'" v-html='course.direction'></span>&nbsp&nbsp
+        <span class="grade"   v-else v-bind:style="color()" v-html='course.grade'></span>
       </div>
       <div class="course_name" v-html='course.class_name'></div>
       <div class="course_teacher" v-html='course.teacher'></div>
