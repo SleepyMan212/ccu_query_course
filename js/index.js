@@ -77,7 +77,6 @@ const vm = new Vue({
     },
     remove_class(target){
       Array.from(target).forEach((i)=>{
-        // console.log(i);
         $(i).removeClass('highlight');
       });
     },
@@ -96,7 +95,7 @@ const vm = new Vue({
       let results=[];
       this.departments=[];
       const query_item = this.query_transalte[this.selected];
-      $('.grades').show();
+      $('.grades').show(500);
       // console.log(query_item);
 
       for(department in this.courses){
@@ -110,9 +109,7 @@ const vm = new Vue({
         if(department!=this.department&&this.department!='0') continue;
         console.log(this.department);
         if(this.department=='I001'){
-
-          // console.log($('.grades'));
-          $('.grades').hide();
+          $('.grades').hide(500);
         }
         this.courses[department].forEach((course)=>{
           // console.log(this.grade);
