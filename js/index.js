@@ -53,6 +53,7 @@ const vm = new Vue({
     change_faculty_state(id){
 
       this.department='0';
+      this.grade='0';
       this.faculty = id;
 
       let $opt = $('.opt');
