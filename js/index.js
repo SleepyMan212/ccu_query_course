@@ -18,8 +18,9 @@ Vue.component('coursebox',{
       return font_color+this.grade_color[parseInt(this.course.grade)-1];
     },
     ccuplus(){
+      console.log("WW");
       return 'https://ccu.plus/#!/courses/'+this.course.class_id;
-    }
+    },
   }
 });
 const vm = new Vue({

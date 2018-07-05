@@ -18,21 +18,16 @@ header {
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
-  /* margin:0 auto; */ }
+  justify-content: center; }
 
 .search_bar {
-  /* display: flex; */
-  /* flex-flow: wrap; */
-  margin: 10px 5px;
-  /* justify-content: center; */ }
+  margin: 10px 5px; }
   .search_bar .opts {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: wrap;
-    flex-flow: wrap;
-    min-width: 600px; }
+    flex-flow: wrap; }
   .search_bar .opt {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -45,7 +40,6 @@ header {
     justify-content: center;
     width: 85px;
     height: 55px;
-    /* text-align: center; */
     padding: 0 7px;
     border: solid 1px #fff;
     border-radius: 10%;
@@ -55,15 +49,10 @@ header {
       background: rgba(255, 255, 255, 0.3); }
 
 .course_box {
-  /* display:flex; */
-  /* flex-flow: wrap; */
-  /* flex-flow: column; */
-  /* flex-flow:wrap; */
   width: 300px;
   border: solid 1px;
   margin: 15px 15px;
-  padding: 10px 5px;
-  /* cursor:pointer; */ }
+  padding: 10px 5px; }
   .course_box:hover {
     background: rgba(255, 255, 255, 0.7);
     color: #0c0d0c; }
@@ -84,21 +73,16 @@ header {
   flex-flow: wrap; }
 
 .course_box .course_name {
-  /* border: 1px solid; */
   height: 70px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
-  /* align-content:center; */ }
+  align-items: center; }
 
 .search {
   text-align: center; }
-
-.departments {
-  height: 150px; }
 
 .link {
   text-align: right; }

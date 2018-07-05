@@ -5,18 +5,13 @@ header{
   min-width: 600px;
   display: flex;
   justify-content: center;
-  /* margin:0 auto; */
 }
 .search_bar{
-  /* display: flex; */
-  /* flex-flow: wrap; */
   margin: 10px 5px;
-  /* justify-content: center; */
 
   .opts{
     display: flex;
     flex-flow: wrap;
-    min-width:600px
   }
   .opt{
     display:flex;
@@ -24,7 +19,6 @@ header{
     justify-content:center;
     width:85px;
     height:55px;
-    /* text-align: center; */
     padding: 0 7px;
     border: solid 1px #fff;
     border-radius: 10%;
@@ -37,15 +31,10 @@ header{
 
 }
 .course_box{
-  /* display:flex; */
-  /* flex-flow: wrap; */
-  /* flex-flow: column; */
-  /* flex-flow:wrap; */
   width:300px;
   border: solid 1px;
   margin: 15px 15px;
   padding: 10px 5px;
-  /* cursor:pointer; */
   &:hover{
     background: rgba(#fff,0.7);
     color:rgb(12, 13, 12);
@@ -63,17 +52,12 @@ header{
   flex-flow: wrap;
 }
 .course_box .course_name{
-  /* border: 1px solid; */
   height: 70px;
   display:flex;
   align-items:center ;
-  /* align-content:center; */
 }
 .search{
   text-align:center;
-}
-.departments{
-  height: 150px;
 }
 .link{
   text-align: right;
