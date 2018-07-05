@@ -63,9 +63,9 @@ header {
   border: solid 1px;
   margin: 15px 15px;
   padding: 10px 5px;
-  cursor: pointer; }
+  /* cursor:pointer; */ }
   .course_box:hover {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.7);
     color: #0c0d0c; }
   .course_box > * {
     margin: 5px 0; }
@@ -98,4 +98,15 @@ header {
   text-align: center; }
 
 .departments {
-  /* height: 150px; */ }
+  height: 150px; }
+
+.link {
+  text-align: right; }
+  .link > a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #0055ff;
+    font-weight: bold; }
+    .link > a:hover {
+      cursor: pointer;
+      font-size: 18px; }

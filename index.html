@@ -47,16 +47,21 @@
   </div>
 
   <template id="course"    >
-    <div class="course_box" v-on:click="open_outline(course.outline)">
+    <div class="course_box" >
       <div class="course_type">
         <span class="department" v-html='course.department'></span>
         <span class="direction" v-if="course.category=='通識'" v-html='course.direction'></span>&nbsp&nbsp
         <span class="grade"   v-else v-bind:style="color()" v-html='course.grade'></span>
+        <span class="category" v-html="course.category"></span>
       </div>
       <div class="course_name" v-html='course.class_name'></div>
       <div class="course_teacher" v-html='course.teacher'></div>
       <div class="course_time" v-html='course.time'></div>
       <div class="course_location" v-html='course.location'></div>
+      <div class="link">
+        <a v-bind:href="ccuplus()" target="_parent">ccuplus</a>
+        <a v-bind:href="outline()" target="_parent">課程大綱</a>
+      </div>
 
     </div>
   </template>

@@ -45,9 +45,9 @@ header{
   border: solid 1px;
   margin: 15px 15px;
   padding: 10px 5px;
-  cursor:pointer;
+  /* cursor:pointer; */
   &:hover{
-    background: rgba(#fff,0.8);
+    background: rgba(#fff,0.7);
     color:rgb(12, 13, 12);
   }
   >*{
@@ -74,4 +74,17 @@ header{
 }
 .departments{
   height: 150px;
+}
+.link{
+  text-align: right;
+  &>a{
+    margin-right: 10px;
+    text-decoration: none;
+    color:rgba(0, 85, 255, 1);
+    font-weight: bold;
+    &:hover{
+      cursor:pointer;
+      font-size: 18px;
+    }
+  }
 }

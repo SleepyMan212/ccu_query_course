@@ -10,18 +10,15 @@ Vue.component('coursebox',{
     };
   },
   methods:{
-    open_outline(outline){
-      // console.log(this.course);
-      console.log(outline);
-      console.log("BB");
-      // window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');
-      window.open(outline, this.course.class_name, config='height=500,width=500');
+    outline(){
+      return this.course.outline;
     },
     color(){
       let font_color="color: ";
-      // console.log(this.grade_color);
-      // console.log(font_color+this.grade_color[parseInt(this.course.grade)-1]);
       return font_color+this.grade_color[parseInt(this.course.grade)-1];
+    },
+    ccuplus(){
+      return 'https://ccu.plus/#!/courses/'+this.course.class_id;
     }
   }
 });
