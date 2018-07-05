@@ -27,6 +27,7 @@ const vm = new Vue({
   data:{
     faculties:['全部','文學院','理學院','社科院','工學院','管學院','法學院','教育學院','其他'],
     departments:[],
+    grades:['0','1','2','3','4'],
     codes:[],
     courses:[],
     faculty:'0',
@@ -35,6 +36,7 @@ const vm = new Vue({
     query_options:['課程名稱','老師名稱'],
     query_transalte:{'課程名稱':'class_name','老師名稱':'teacher'},
     selected:'課程名稱',
+    grade:'0',
   },
   mounted:function() {
     $.getJSON("code_table.json").then((res)=>{
@@ -62,13 +64,11 @@ const vm = new Vue({
     },
     change_department_state(id){
       this.department = this.codes[id];
-      let $opt = $('.departments .opt');;
+      let $opt = $('.departments .opt');
       this.remove_class($opt);
-
       $opt = $(`.opt:contains(${id})`);
 
       $opt.each((i,o)=>{
-        console.log(o.innerText);
         if(o.innerText==id){
           $(o).addClass('highlight');
         }
@@ -81,6 +81,14 @@ const vm = new Vue({
         $(i).removeClass('highlight');
       });
     },
+    change_grade_state(grade){
+      let $opt = $('.grades>.opt');
+      this.grade=grade;
+      this.remove_class($opt);
+
+      let $grade = $($opt.get(grade));
+      $grade.addClass('highlight');
+    }
 
   },
   computed:{
@@ -88,17 +96,30 @@ const vm = new Vue({
       let results=[];
       this.departments=[];
       const query_item = this.query_transalte[this.selected];
+      $('.grades').show();
       // console.log(query_item);
+
       for(department in this.courses){
+        // 如果不符合科系 或者 不適其他的 就直接continue
         if((!(department.match(new RegExp('^[a-z]','i'))&&this.faculty=='8'))&&(this.faculty!=department[0])&&this.faculty!='0') continue;
+        // 列出該院有哪些科系
         if(this.faculty!='0'){
           this.departments.push(this.codes[department]);
         }
+        // 如果不符合的系 或者 不適全部的 就跳過
         if(department!=this.department&&this.department!='0') continue;
+        console.log(this.department);
+        if(this.department=='I001'){
 
+          // console.log($('.grades'));
+          $('.grades').hide();
+        }
         this.courses[department].forEach((course)=>{
-          const flag = course[query_item].toLowerCase().indexOf(this.filter.toLowerCase());
-          if(flag!=-1){
+          // console.log(this.grade);
+
+          const flag1 = course.grade!=this.grade&&this.grade!='0';
+          const flag2 = course[query_item].toLowerCase().indexOf(this.filter.toLowerCase());
+          if(flag2!=-1&&!flag1){
             course['department'] = this.codes[department];
             results.push(course);
           }

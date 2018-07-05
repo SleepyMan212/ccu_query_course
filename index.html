@@ -28,8 +28,14 @@
           {{department}}
         </div>
       </div>
+      <hr>
+      <div class="opts grades">
+        <div class="opt" v-for="grade,i in grades" v-on:click="change_grade_state(i)">
+          <span v-if="grade!='0'">{{grade}}年級</span>
+          <span v-else>全部</span>
+        </div>
+      </div>
       <div class="search">
-        <!-- <label>課程名稱</label> -->
         <select v-model="selected">
           <option v-for="opt,i in query_options">
             {{opt}}
