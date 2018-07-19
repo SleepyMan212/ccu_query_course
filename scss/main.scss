@@ -74,3 +74,13 @@ header{
     }
   }
 }
+@media (max-width: 480px){
+  .course_box{
+    width: 80%;
+  }
+}
+@media (max-width: 1024px){
+  .course_box{
+    width: 45%;
+  }
+}
