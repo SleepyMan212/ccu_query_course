@@ -28,7 +28,8 @@
           {{department}}
         </div>
       </div>
-      <hr>
+      <hr v-if="departments.length!=0">
+      <!-- {{departments}} -->
       <div class="opts grades">
         <div class="opt" v-for="grade,i in grades" v-on:click="change_grade_state(i)">
           <span v-if="grade!='0'">{{grade}}年級</span>
