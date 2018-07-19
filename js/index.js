@@ -28,10 +28,13 @@ const vm = new Vue({
     faculties:['全部','文學院','理學院','社科院','工學院','管學院','法學院','教育學院','其他'],
     departments:[],
     grades:['0','1','2','3','4'],
+    directions:['中國語文知識與應用','英文能力訓練','基礎概論課程','自然科學與技術','公民與社會參與','經濟與國際脈動','能源、環境與生態','人文思維與生命探索','藝術與美學',
+                '中正講座'],
     codes:[],
     courses:[],
     faculty:'0',
     department:'0',
+    direction:'0',
     filter:'',
     query_options:['課程名稱','老師名稱'],
     query_transalte:{'課程名稱':'class_name','老師名稱':'teacher'},
@@ -65,8 +68,14 @@ const vm = new Vue({
     },
     change_department_state(id){
       this.department = this.codes[id];
-      let $opt = $('.departments .opt');
+      let $opt = $('.departments>.opt');
       this.remove_class($opt);
+      // 下面的選項(年級)
+      let $sub1_opt = $('.directions>.opt');
+      this.remove_class($sub1_opt);
+      let $sub2_opt = $('.grades>.opt');
+      this.remove_class($sub2_opt);
+
       $opt = $(`.opt:contains(${id})`);
 
       $opt.each((i,o)=>{
@@ -88,6 +97,17 @@ const vm = new Vue({
 
       let $grade = $($opt.get(grade));
       $grade.addClass('highlight');
+    },
+    change_direction_state(index,direction){
+      let $opt = $('.directions>.opt');
+
+      this.remove_class($opt);
+      // this.department='0';
+      this.direction=direction;
+      // console.log(direction);
+      // console.log(this.direction);
+      let $direction = $($opt.get(index));
+      $direction.addClass('highlight')
     }
 
   },
@@ -95,8 +115,9 @@ const vm = new Vue({
     filter_courses:function () {
       let results=[];
       this.departments=[];
+      // 要用哪一個項目來查詢
       const query_item = this.query_transalte[this.selected];
-      $('.grades').show(500);
+      // $('.grades').show(500);
       // console.log(query_item);
 
       for(department in this.courses){
@@ -106,16 +127,22 @@ const vm = new Vue({
         if(this.faculty!='0'){
           this.departments.push(this.codes[department]);
         }
-        // 如果不符合的系 或者 不適全部的 就跳過
+        // 如果不符合的系 或者 不是全部的 就跳過
         if(department!=this.department&&this.department!='0') continue;
         console.log(this.department);
-        if(this.department=='I001'){
-          $('.grades').hide(500);
-        }
-        this.courses[department].forEach((course)=>{
-          // console.log(this.grade);
 
-          const flag1 = course.grade!=this.grade&&this.grade!='0';
+        this.courses[department].forEach((course)=>{
+          if(this.department=='I001'){
+            // 如果是第一次，就全部顯示出來，因為初始化為0
+            if(this.direction=='0') flag1 = false;
+            else{
+              flag1 = course.direction.indexOf(this.direction)!=-1?false:true;
+            }
+          }else{
+            // 判斷年級是否有被選取
+            flag1 = course.grade!=this.grade&&this.grade!='0';
+          }
+          // 判斷是否有用關鍵字進行查詢
           const flag2 = course[query_item].toLowerCase().indexOf(this.filter.toLowerCase());
           if(flag2!=-1&&!flag1){
             course['department'] = this.codes[department];

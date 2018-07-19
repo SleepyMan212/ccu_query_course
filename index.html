@@ -30,10 +30,15 @@
       </div>
       <hr v-if="departments.length!=0">
       <!-- {{departments}} -->
-      <div class="opts grades">
+      <div class="opts grades" v-if="department!='I001'">
         <div class="opt" v-for="grade,i in grades" v-on:click="change_grade_state(i)">
           <span v-if="grade!='0'">{{grade}}年級</span>
           <span v-else>全部</span>
+        </div>
+      </div>
+      <div class="opts directions" v-else>
+        <div class="opt" v-for="direction,i in directions" style="width:108px;" v-on:click='change_direction_state(i,direction)'>
+          <span class="small_font word">{{direction}}</span>
         </div>
       </div>
       <div class="search">
@@ -45,6 +50,8 @@
         <input type="text" v-model="filter">
       </div>
     </div>
+    {{grade}}
+    {{direction}}
     <div class="couerse_panel">
       <coursebox v-bind:course='cs' v-for='cs in filter_courses' >
 
