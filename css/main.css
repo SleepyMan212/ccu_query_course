@@ -1,6 +1,6 @@
 @charset "UTF-8";
 html, body {
-  min-width: 600px;
+  min-width: 320px;
   font-family: sans-serif,細明體;
   margin: 0;
   padding: 0;
@@ -55,7 +55,7 @@ header {
       background: rgba(255, 255, 255, 0.3); }
 
 .course_box {
-  width: 300px;
+  width: 22%;
   border: solid 1px;
   margin: 15px 15px;
   padding: 10px 5px; }
@@ -102,10 +102,10 @@ header {
       cursor: pointer;
       font-size: 18px; }
 
-@media (max-width: 480px) {
+@media screen and (min-width: 480px) and (max-width: 767px) {
   .course_box {
     width: 80%; } }
 
-@media (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .course_box {
     width: 45%; } }

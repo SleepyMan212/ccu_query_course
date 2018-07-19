@@ -32,7 +32,7 @@ header{
 
 }
 .course_box{
-  width:300px;
+  width:22%;
   border: solid 1px;
   margin: 15px 15px;
   padding: 10px 5px;
@@ -74,12 +74,12 @@ header{
     }
   }
 }
-@media (max-width: 480px){
+@media screen and (min-width: 480px) and (max-width: 767px) {
   .course_box{
     width: 80%;
   }
 }
-@media (max-width: 1024px){
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .course_box{
     width: 45%;
   }
