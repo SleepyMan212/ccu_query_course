@@ -37,7 +37,7 @@ header{
   margin: 15px 15px;
   padding: 10px 5px;
   &:hover{
-    background: rgba(#fff,0.7);
+    background: rgba(#fff,0.6);
     color:rgb(12, 13, 12);
   }
   >*{
@@ -64,13 +64,14 @@ header{
 .link{
   text-align: right;
   &>a{
+    font-size: 18px;
     margin-right: 10px;
     text-decoration: none;
-    color:rgba(0, 85, 255, 1);
+    color: rgba(235, 23, 23,0.8);
     font-weight: bold;
     &:hover{
       cursor:pointer;
-      font-size: 18px;
+      font-size: 24px;
     }
   }
 }
