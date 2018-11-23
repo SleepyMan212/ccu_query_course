@@ -37,10 +37,11 @@ const vm = new Vue({
     department: '0',
     direction: '0',
     filter: '',
-    query_options: ['課程名稱', '老師名稱'],
+    query_options: ['課程名稱', '老師名稱','課程代碼'],
     query_transalte: {
       '課程名稱': 'class_name',
-      '老師名稱': 'teacher'
+      '老師名稱': 'teacher',
+      '課程代碼': 'class_id'
     },
     selected: '課程名稱',
     grade: '0',
