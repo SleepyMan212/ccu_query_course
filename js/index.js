@@ -35,6 +35,7 @@ const vm = new Vue({
     courses: [],
     faculty: '0',
     department: '0',
+    grade: '0',
     direction: '0',
     filter: '',
     query_options: ['課程名稱', '老師名稱','課程代碼'],
@@ -44,7 +45,6 @@ const vm = new Vue({
       '課程代碼': 'class_id'
     },
     selected: '課程名稱',
-    grade: '0',
   },
   mounted: function () {
     $.getJSON("code_table.json").then((res) => {
@@ -73,6 +73,7 @@ const vm = new Vue({
     },
     change_department_state(id) {
       this.department = this.codes[id];
+      this.grade = '0';
       let $opt = $('.departments>.opt');
       this.remove_class($opt);
       // 下面的選項(年級)

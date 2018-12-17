@@ -17,25 +17,6 @@ html, body {
 .word {
   word-break: normal; }
 
-@media only screen and (min-width: 480px) and (max-width: 768px) {
-  .course_box {
-    width: 85%; }
-  .opt {
-    width: 20%;
-    font-size: 1.45rem; } }
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-  .course_box {
-    width: 43%; }
-  .opt {
-    width: 15%;
-    font-size: 1.3rem; } }
-
-@media only screen and (min-width: 1024px) {
-  .opt {
-    width: 7.5%;
-    font-size: 1rem; } }
-
 header {
   min-width: 320px;
   display: -webkit-box;
@@ -52,10 +33,7 @@ header {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: wrap;
-    flex-flow: wrap;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center; }
+    flex-flow: wrap; }
   .search_bar .opt {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -66,14 +44,12 @@ header {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    /* width: 7%; */
-    height: 12%;
-    padding: 1% 0.5%;
-    line-height: 2rem;
+    width: 75px;
+    height: 55px;
+    padding: 0 5px;
     border: solid 1px #fff;
     border-radius: 10%;
-    margin: 12px 7px;
-    /* font-size: 1rem; */ }
+    margin: 12px 7px; }
     .search_bar .opt:hover {
       cursor: pointer;
       background: rgba(255, 255, 255, 0.3); }
@@ -126,3 +102,16 @@ header {
     .link > a:hover {
       cursor: pointer;
       font-size: 24px; }
+
+.opts {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .course_box {
+    width: 85%; } }
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .course_box {
+    width: 43%; } }
