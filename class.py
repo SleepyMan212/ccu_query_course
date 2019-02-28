@@ -61,26 +61,15 @@ def isUpdate(index,html):
     else:
         exit("Have some errors judge the date whether update")
 
-    # if os.path.exists('old_md5'):
-    #     with open('old_md5', 'r') as f:
-    #         old_md5 = f.read()
-    # with open('old_md5' ,'w') as f:
-    #     f.write(md5)
-    # print(md5)
-    # print(old_md5)
-    # if md5 != old_md5:
-    #     return True
-    # else:
-    #     return False
 
 def getdata(url, index,courses):
+    print(courses)
     html = requests.get(url)
     html.encoding = 'utf-8'
     if isUpdate(index,html.text.encode("utf-8")) == False:
         return
     sp = BeautifulSoup(html.text,'lxml')
     table = sp.select('table')
-    # print(table[0])
     trs = table[0].select('tr')
     course = []
     # print(index[-1]=='6')
@@ -102,7 +91,7 @@ def getdata(url, index,courses):
                     'outline': tds[12].select('a')[0].get('href'),
                     'note': tds[13].text,
                    }
-            # courses[index].append(tmp)
+
             course.append(tmp)
 
     elif (index[-1] == '6' and index != '7306') or index == '4508':
@@ -122,7 +111,6 @@ def getdata(url, index,courses):
                     'note': tds[13].text,
                     # 'direction':''
                     }
-            # courses[index].append(tmp)
             course.append(tmp)
 
     else:
@@ -143,8 +131,9 @@ def getdata(url, index,courses):
                    'note': tds[12].text,
                 #    'direction': ''
                    }
-            # courses[index].append(tmp)
             course.append(tmp)
+
+    courses[index] = tmp
 
     fname = "./courses_data/"+index+".json"
     dname = './old_courses_data/'+ index + '/'
@@ -159,7 +148,7 @@ def getdata(url, index,courses):
 
 def crawler():
     global courses
-    courses = {}
+    # courses = {}
     url = 'https://kiki.ccu.edu.tw/~ccmisp06/Course/'
     html = requests.get(url)
     # print(html.text)
@@ -219,7 +208,9 @@ def find_course_by_class_id(id):
 def moveOldFile():
     # move file(courses.data) before store data to courses.data
     if os.path.exists('courses.json'):
-        shutil.copyfile('courses.json','./courses_data/'+str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
+        if not os.path.isdir("./old_courses_data/fullcourse"):
+            os.mkdir("./old_courses_data/fullcourse")
+        shutil.copyfile('courses.json','./old_courses_data/fullcourse/'+str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
         # shutil.copyfile('courses.json','./courses_data/'+str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
 
     # move file(code_table.json) before store data to code_table.json
@@ -272,28 +263,28 @@ with open('code_table.json', 'w', encoding='utf-8') as f:
     json.dump(code_table, f)
 
 # cmdline search
-while True:
-    print('\n----------------------')
-    print('1. 查找課程by課名')
-    print('2. 查找課程by老師')
-    print('3. 查找課程by課程代碼')
-    print('0. 離開')
-    print('----------------------')
-    ch = input("選項: ")
-    if ch == '1':
-        name = input('請輸入課程名稱: ')
-        find_course_by_class_name(name.strip())
-    elif ch == '2':
-        name = input('請輸入老師名稱: ')
-        find_course_by_teacher_name(name.strip())
-    elif ch == '3':
-        name = input('請輸入課程代碼: ')
-        find_course_by_class_id(name.strip())
-    elif ch == '0':
-        break
-    else :
-        print('Please input the correctly option')
-        input('press any key to countinue')
+# while True:
+#     print('\n----------------------')
+#     print('1. 查找課程by課名')
+#     print('2. 查找課程by老師')
+#     print('3. 查找課程by課程代碼')
+#     print('0. 離開')
+#     print('----------------------')
+#     ch = input("選項: ")
+#     if ch == '1':
+#         name = input('請輸入課程名稱: ')
+#         find_course_by_class_name(name.strip())
+#     elif ch == '2':
+#         name = input('請輸入老師名稱: ')
+#         find_course_by_teacher_name(name.strip())
+#     elif ch == '3':
+#         name = input('請輸入課程代碼: ')
+#         find_course_by_class_id(name.strip())
+#     elif ch == '0':
+#         break
+#     else :
+#         print('Please input the correctly option')
+#         input('press any key to countinue')
 #input()
 # close db
 conn.close()
