@@ -1,12 +1,14 @@
 # encoding=utf-8
 
+import hashlib
 import requests
 import re,os
 import shutil
 from bs4 import BeautifulSoup
-import hashlib
 import time
+from db import create_conn
 
+md5 = hashlib.md5()
 courses = {}
 code_table = {}
 translate = {
@@ -26,33 +28,61 @@ translate = {
     'field' : '領域'
 }
 
-def isUpdate(html):
-    print(html)
+def isUpdate(index,html):
+    # print(html)
     m = hashlib.md5(html)
     # m.update(html)
     md5 = m.hexdigest()
-
-    old_md5 = ''
-    if os.path.exists('old_md5'):
-        with open('old_md5', 'r') as f:
-            old_md5 = f.read()
-    with open('old_md5' ,'w') as f:
-        f.write(md5)
-    print(md5)
-    print(old_md5)
-    if md5 != old_md5:
+    sql = "SELECT `hash_value` FROM `course_hash` WHERE `department_name` = '{}'"
+    cursor.execute(sql.format(index))
+    row = cursor.fetchone()
+    # print(row[0])
+    # for key,value in enumerate(hash_value):
+        # print(key,value)
+    # hash_value = row[0]
+    if row == None:
+        sql = "INSERT INTO `course_hash` (`department_name`,`hash_value`,`modify_date`) VALUES ('{}','{}',CURDATE())"
+        # sql = "INSERT INTO `course_hash` (`department_name`,`hash_value`) VALUES ({},{})"
+        # print(sql.format(str(index),str(md5)))
+        cursor.execute(sql.format(index,md5))
+        conn.commit()
         return True
-    else:
+
+    hash_value = row[0]
+
+    if row[0] != md5:
+        sql = "UPDATE `course_hash` SET `hash_value` = '{}',`modify_date` = CURDATE() WhERE `department_name` = '{}'"
+        cursor.execute(sql.format(md5,index))
+        conn.commit()
+        return True
+    elif row[0] == md5:
+        print(index + " is not need to update")
         return False
+    else:
+        exit("Have some errors judge the date whether update")
+
+    # if os.path.exists('old_md5'):
+    #     with open('old_md5', 'r') as f:
+    #         old_md5 = f.read()
+    # with open('old_md5' ,'w') as f:
+    #     f.write(md5)
+    # print(md5)
+    # print(old_md5)
+    # if md5 != old_md5:
+    #     return True
+    # else:
+    #     return False
 
 def getdata(url, index,courses):
     html = requests.get(url)
     html.encoding = 'utf-8'
+    if isUpdate(index,html.text.encode("utf-8")) == False:
+        return
     sp = BeautifulSoup(html.text,'lxml')
-
     table = sp.select('table')
     # print(table[0])
     trs = table[0].select('tr')
+    course = []
     # print(index[-1]=='6')
     if index == 'I001':
         for tr in trs[1:]:
@@ -72,7 +102,8 @@ def getdata(url, index,courses):
                     'outline': tds[12].select('a')[0].get('href'),
                     'note': tds[13].text,
                    }
-            courses[index].append(tmp)
+            # courses[index].append(tmp)
+            course.append(tmp)
 
     elif (index[-1] == '6' and index != '7306') or index == '4508':
         for tr in trs[1:]:
@@ -91,7 +122,9 @@ def getdata(url, index,courses):
                     'note': tds[13].text,
                     # 'direction':''
                     }
-            courses[index].append(tmp)
+            # courses[index].append(tmp)
+            course.append(tmp)
+
     else:
         for tr in trs[1:]:
             tds = tr.select('td')
@@ -110,7 +143,19 @@ def getdata(url, index,courses):
                    'note': tds[12].text,
                 #    'direction': ''
                    }
-            courses[index].append(tmp)
+            # courses[index].append(tmp)
+            course.append(tmp)
+
+    fname = "./courses_data/"+index+".json"
+    dname = './old_courses_data/'+ index + '/'
+
+    if not os.path.isdir(dname):
+        os.mkdir(dname)
+    if os.path.exists(fname):
+        shutil.copyfile(fname, dname + index + '_' + str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
+    with open(fname,'w',encoding='utf-8') as f:
+        import json
+        json.dump(course,f);
 
 def crawler():
     global courses
@@ -181,12 +226,23 @@ def moveOldFile():
     if os.path.exists('code_table.json'):
         shutil.copyfile('code_table.json','./code_table_data/'+str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
 
+# create a connection
+conn = create_conn()
+cursor = conn.cursor()
+cursor.execute('CREATE TABLE IF NOT EXISTS `course_hash` (department_id INTEGER(99) PRIMARY KEY NOT NULL AUTO_INCREMENT,hash_value VARCHAR(255) NOT NULL,department_name VARCHAR(255) NOT NULL,modify_date DATE NOT NULL) CHARACTER SET = utf8 COLLATE = utf8_unicode_ci')
+conn.commit()
+# conn.close()
+
+# exit()
 # create the dir for sroring data
 if not os.path.isdir("code_table_data"):
     os.mkdir("code_table_data")
 
 if not os.path.isdir("courses_data"):
     os.mkdir("courses_data")
+
+if not os.path.isdir("old_courses_data"):
+    os.mkdir("old_courses_data")
 
 # if exists the old file we can use them.
 if os.path.exists('courses.json'):
@@ -199,7 +255,7 @@ if os.path.exists('code_table.json'):
         code_table = json.load(f)
 if crawler() == True:
     print("Finish crawler")
-    print(courses)
+    # print(courses)
     moveOldFile()
 else:
     print("The website is not update")
@@ -239,3 +295,5 @@ while True:
         print('Please input the correctly option')
         input('press any key to countinue')
 #input()
+# close db
+conn.close()
