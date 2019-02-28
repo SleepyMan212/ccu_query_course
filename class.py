@@ -1,3 +1,5 @@
+# encoding=utf-8
+
 import requests
 import re,os
 import shutil
@@ -176,8 +178,8 @@ def moveOldFile():
         # shutil.copyfile('courses.json','./courses_data/'+str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
 
     # move file(code_table.json) before store data to code_table.json
-    # if os.path.exists('code_table.json'):
-        # shutil.copyfile('code_table.json','./code_table_data/'+str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
+    if os.path.exists('code_table.json'):
+        shutil.copyfile('code_table.json','./code_table_data/'+str(time.strftime('%Y_%m_%d',time.localtime())) + '.json')
 
 # create the dir for sroring data
 if not os.path.isdir("code_table_data"):
