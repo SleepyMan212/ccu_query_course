@@ -50,11 +50,22 @@ const vm = new Vue({
     $.getJSON("code_table.json").then((res) => {
       this.codes = res;
       console.log("code read sucessly");
+    })
+    .then(()=>{
+      Object.keys(this.codes).forEach((key)=>{
+        if(key.match(new RegExp('[a-zA-Z0-9]{4}','i'))) {
+          console.log("./courses_data/"+key+".json");
+          $.getJSON("./courses_data/"+key+".json").then((res)=>{
+            console.log(res);
+            this.courses.push(res)
+          })
+        }
+      })
     });
-    $.getJSON("courses.json").then((res) => {
-      this.courses = res
-      console.log("courses read sucessly");
-    });
+    // $.getJSON("courses.json").then((res) => {
+    //   this.courses = res
+    //   console.log("courses read sucessly");
+    // });
     console.log(this.query_transalte['課程名稱']);
   },
   methods: {
