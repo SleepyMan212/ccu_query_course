@@ -63,7 +63,7 @@ def isUpdate(index,html):
 
 
 def getdata(url, index,courses):
-    print(courses)
+    # print(courses)
     html = requests.get(url)
     html.encoding = 'utf-8'
     if isUpdate(index,html.text.encode("utf-8")) == False:

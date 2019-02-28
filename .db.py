@@ -1,14 +1,14 @@
-import mysql.connector
+import pymysql
 
 host = ""
 user = ""
 passwd = ""
 database = ""
 def create_conn():
-    maxdb = mysql.connector.connect(
+    maxdb = pymysql.connect(
       host = host,
       user = user,
       password = passwd,
       database = database,
       )
-    return maxdb.cursor()
+    return maxdb
