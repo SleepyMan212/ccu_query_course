@@ -7,6 +7,7 @@ import shutil
 from bs4 import BeautifulSoup
 import time
 from db import create_conn
+from subprocess import call
 
 md5 = hashlib.md5()
 courses = {}
@@ -67,7 +68,7 @@ def getdata(url, index,courses):
     html = requests.get(url)
     html.encoding = 'utf-8'
     if isUpdate(index,html.text.encode("utf-8")) == False:
-        return
+        return False
     sp = BeautifulSoup(html.text,'lxml')
     table = sp.select('table')
     trs = table[0].select('tr')
@@ -146,9 +147,12 @@ def getdata(url, index,courses):
         import json
         json.dump(course,f);
 
+    return True
+
 def crawler():
     global courses
     # courses = {}
+    is_update = False;
     url = 'https://kiki.ccu.edu.tw/~ccmisp06/Course/'
     html = requests.get(url)
     # print(html.text)
@@ -173,9 +177,11 @@ def crawler():
             print(href)
             if not href[0:4] in courses:
                 courses[href[0:4]]=[]
-            getdata(os.path.join(url, href), href[0:4], courses)
+            tmp = getdata(os.path.join(url, href), href[0:4], courses)
+            if tmp == True:
+                is_update = True
         print('--------------------------------------')
-    return True
+    return is_update
     # print(courses)
 
 def print_course(id,course):
@@ -246,6 +252,10 @@ if os.path.exists('code_table.json'):
         code_table = json.load(f)
 if crawler() == True:
     print("Finish crawler")
+    call('git add -A',shell=True)
+    call('git commit -m "update the course data"',shell=True)
+    call('git push -u origin gh-pages',shell=True)
+
     # print(courses)
     moveOldFile()
 else:
