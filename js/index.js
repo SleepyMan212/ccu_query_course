@@ -32,19 +32,20 @@ const vm = new Vue({
       '中正講座'
     ],
     codes: [],
-    courses: [],
+    courses:{},
     faculty: '0',
     department: '0',
     grade: '0',
     direction: '0',
     filter: '',
+    is_read: false,
     query_options: ['課程名稱', '老師名稱','課程代碼'],
     query_transalte: {
       '課程名稱': 'class_name',
       '老師名稱': 'teacher',
       '課程代碼': 'class_id'
     },
-    selected: '課程名稱',
+    selected: '老師名稱',
   },
   mounted: function () {
     $.getJSON("code_table.json").then((res) => {
@@ -54,19 +55,22 @@ const vm = new Vue({
     .then(()=>{
       Object.keys(this.codes).forEach((key)=>{
         if(key.match(new RegExp('[a-zA-Z0-9]{4}','i'))) {
-          console.log("./courses_data/"+key+".json");
           $.getJSON("./courses_data/"+key+".json").then((res)=>{
-            console.log(res);
-            this.courses.push(res)
+            this.courses[`${key}`] = res;
+
           })
         }
       })
+    })
+    .then(()=>{
+        console.log("courses read sucessly");
+        this.is_read = true;
     });
-    // $.getJSON("courses.json").then((res) => {
+    // $.getJSON("courses_data/2018_11_24.json").then((res) => {
     //   this.courses = res
     //   console.log("courses read sucessly");
     // });
-    console.log(this.query_transalte['課程名稱']);
+    // console.log(this.query_transalte['課程名稱']);
   },
   methods: {
     change_faculty_state(id) {
@@ -77,10 +81,20 @@ const vm = new Vue({
 
       let $opt = $('.opt');
 
+      // remove the all highlight of options
       this.remove_class($opt);
 
       $opt = $($opt.get(id));
       $opt.addClass('highlight');
+
+      // show the the Faulting of departments
+      this.departments = [];    // init
+      for (department in this.courses) {
+          if ((!(department.match(new RegExp('^[a-z]', 'i')) && this.faculty == '8')) && (this.faculty != department[0]) || this.faculty == '0') continue;
+
+          this.departments.push(this.codes[department]);
+
+      }
     },
     change_department_state(id) {
       this.department = this.codes[id];
@@ -88,6 +102,7 @@ const vm = new Vue({
       let $opt = $('.departments>.opt');
       this.remove_class($opt);
       // 下面的選項(年級)
+      // remove the direction and grade highlight
       let $sub1_opt = $('.directions>.opt');
       this.remove_class($sub1_opt);
       let $sub2_opt = $('.grades>.opt');
@@ -95,6 +110,7 @@ const vm = new Vue({
 
       $opt = $(`.opt:contains(${id})`);
 
+      // add highlight at the select option
       $opt.each((i, o) => {
         if (o.innerText == id) {
           $(o).addClass('highlight');
@@ -130,23 +146,20 @@ const vm = new Vue({
   },
   computed: {
     filter_courses: function () {
-      let results = [];
-      this.departments = [];
+      let results = this.courses;
+      results = [];
       // 要用哪一個項目來查詢
       const query_item = this.query_transalte[this.selected];
-      // $('.grades').show(500);
-      // console.log(query_item);
-
+      // if(this.is_read === true){
+      //     this.selected = '課程名稱',
+      //     this.is_read = false;
+      //
+      // }
       for (department in this.courses) {
-        // 如果不符合科系 或者 不適其他的 就直接continue
-        if ((!(department.match(new RegExp('^[a-z]', 'i')) && this.faculty == '8')) && (this.faculty != department[0]) && this.faculty != '0') continue;
-        // 列出該院有哪些科系
-        if (this.faculty != '0') {
-          this.departments.push(this.codes[department]);
-        }
         // 如果不符合的系 或者 不是全部的 就跳過
         if (department != this.department && this.department != '0') continue;
-        console.log(this.department);
+        // console.log(this.department);
+        console.log(this.courses);
 
         this.courses[department].forEach((course) => {
           if (this.department == 'I001') {

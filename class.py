@@ -67,8 +67,8 @@ def getdata(url, index,courses):
     # print(courses)
     html = requests.get(url)
     html.encoding = 'utf-8'
-    if isUpdate(index,html.text.encode("utf-8")) == False:
-        return False
+    # if isUpdate(index,html.text.encode("utf-8")) == False:
+    #     return False
     sp = BeautifulSoup(html.text,'lxml')
     table = sp.select('table')
     trs = table[0].select('tr')
@@ -134,7 +134,7 @@ def getdata(url, index,courses):
                    }
             course.append(tmp)
 
-    courses[index] = tmp
+    courses[index] = course
 
     fname = "./courses_data/"+index+".json"
     dname = './old_courses_data/'+ index + '/'
