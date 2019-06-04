@@ -133,6 +133,7 @@ def getdata(url, index,courses):
                 #    'direction': ''
                    }
             course.append(tmp)
+            # print(tmp)
 
     # print(course)
     courses[index] = course
