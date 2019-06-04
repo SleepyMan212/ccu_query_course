@@ -254,10 +254,10 @@ if os.path.exists('code_table.json'):
         import json
         code_table = json.load(f)
 if crawler() == True:
-    print("Finish crawler")
-    call('git add -A',shell=True)
-    call('git commit -m "update the course data"',shell=True)
-    call('git push -u origin gh-pages',shell=True)
+    # print("Finish crawler")
+    # call('git add -A',shell=True)
+    # call('git commit -m "update the course data"',shell=True)
+    # call('git push -u origin gh-pages',shell=True)
 
     # print(courses)
     moveOldFile()

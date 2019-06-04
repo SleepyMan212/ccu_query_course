@@ -2,7 +2,6 @@ Vue.component('coursebox', {
   template: '#course',
   props: ['course'],
   mounted: () => {
-    // console.log(this.course)
   },
   data: () => {
     return {
@@ -52,24 +51,24 @@ const vm = new Vue({
       this.codes = res;
       console.log("code read sucessly");
     })
-    .then(()=>{
-      Object.keys(this.codes).forEach((key)=>{
-        if(key.match(new RegExp('[a-zA-Z0-9]{4}','i'))) {
-          $.getJSON("./courses_data/"+key+".json").then((res)=>{
-            this.courses[`${key}`] = res;
-
-          })
-        }
-      })
-    })
-    .then(()=>{
-        console.log("courses read sucessly");
-        this.is_read = true;
-    });
-    // $.getJSON("courses_data/2018_11_24.json").then((res) => {
-    //   this.courses = res
-    //   console.log("courses read sucessly");
+    // .then(()=>{
+    //   Object.keys(this.codes).forEach((key)=>{
+    //     if(key.match(new RegExp('[a-zA-Z0-9]{4}','i'))) {
+    //       $.getJSON("./courses_data/"+key+".json").then((res)=>{
+    //         this.courses[`${key}`] = res;
+    //
+    //       })
+    //     }
+    //   })
+    // })
+    // .then(()=>{
+    //     console.log("courses read sucessly");
+    //     this.is_read = true;
     // });
+    $.getJSON("courses.json").then((res) => {
+      this.courses = res
+      console.log("courses read sucessly");
+    });
     // console.log(this.query_transalte['課程名稱']);
   },
   methods: {
@@ -159,7 +158,7 @@ const vm = new Vue({
         // 如果不符合的系 或者 不是全部的 就跳過
         if (department != this.department && this.department != '0') continue;
         // console.log(this.department);
-        console.log(this.courses);
+        // console.log(this.courses);
 
         this.courses[department].forEach((course) => {
           if (this.department == 'I001') {
