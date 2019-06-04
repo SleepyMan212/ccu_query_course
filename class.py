@@ -134,8 +134,9 @@ def getdata(url, index,courses):
                    }
             course.append(tmp)
 
+    # print(course)
     courses[index] = course
-
+    # print(courses[index])
     fname = "./courses_data/"+index+".json"
     dname = './old_courses_data/'+ index + '/'
 
@@ -180,6 +181,7 @@ def crawler():
             tmp = getdata(os.path.join(url, href), href[0:4], courses)
             if tmp == True:
                 is_update = True
+            # print(courses[href[0:4]])
         print('--------------------------------------')
     return is_update
     # print(courses)
